@@ -1,0 +1,35 @@
+{
+  "name": "market-js",
+  "version": "0.1.0",
+  "description": "A market bot written with Discord.js",
+  "main": "market-js.js",
+  "scripts": {
+    "test:lint": "./node_modules/.bin/eslint .",
+    "test": "npm run test:lint",
+    "start": "node market-js.js"
+  },
+  "engines": {
+    "node": ">=8"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Tesshin/Market-JS.git"
+  },
+  "author": "Peko#7955",
+  "authorUrl": "https://www.tailstar.us",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Tesshin/Market-JS/issues"
+  },
+  "homepage": "https://github.com/Tesshin/Market-JS#readme",
+  "dependencies": {
+    "bufferutil": "^3.0.5",
+    "discord.js": "^11.4.2",
+    "erlpack": "discordapp/erlpack",
+    "enmap": "^4.0.12",
+    "mongodb": "^3.1.6"
+  },
+  "devDependencies": {
+    "eslint": "^5.0.0"
+  }
+}
