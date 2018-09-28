@@ -23,11 +23,13 @@
   },
   "homepage": "https://github.com/Tesshin/Market-JS#readme",
   "dependencies": {
+    "ascii-table": "^0.0.9",
     "bufferutil": "^3.0.5",
     "discord.js": "^11.4.2",
     "erlpack": "discordapp/erlpack",
     "enmap": "^4.0.12",
-    "mongodb": "^3.1.6"
+    "moment": "^2.22.2",
+    "mongoose": "^5.2.18"
   },
   "devDependencies": {
     "eslint": "^5.0.0"
