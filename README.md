@@ -9,7 +9,7 @@ A Discord bot for the online virtual pet adopting website. With the bot you can 
 
 ### Prerequisites
 
-* Node.js 8 and above.
+* Node 8 and above.
 * A [Discord](https://discordapp.com) account.
 
 ### Installation
