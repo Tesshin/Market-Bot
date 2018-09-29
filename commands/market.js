@@ -16,17 +16,21 @@ exports.run = (client, message, args) => {
           time = parseInt(args.slice(-1)[0].match(/^(\d{1,2})m?/)[0]); // Get listing time
           name = args.slice(1, -1).join(" "); // Get name of item
         }
-        message.channel.send(`Adding item **${name}** for ${time} minute(s)...`).catch(err => console.log(err));
-        MongoClient.connect(config.mongodb_uri, {useNewUrlParser: true}, function (err, db) { // Connect to MongoDB
-          const dbo = db.db(config.database_name); // Select database
-          dbo.collection(config.collection_name).insertOne({ // Insert a document
-            itemName: name, // Name of item
-            submittedBy: message.author.tag, // Discord tag of user
-            createdAt: moment().add(time, "m").toDate() // Date item is added
+        if (name.length > 40) {
+          message.channel.send("That item name is too long!").catch(err => console.log(err));
+        } else {
+          message.channel.send(`Adding item **${name}** for ${time} minute(s)...`).catch(err => console.log(err));
+          MongoClient.connect(config.mongodb_uri, {useNewUrlParser: true}, function (err, db) { // Connect to MongoDB
+            const dbo = db.db(config.database_name); // Select database
+            dbo.collection(config.collection_name).insertOne({ // Insert a document
+              itemName: name, // Name of item
+              submittedBy: message.author.tag, // Discord tag of user
+              createdAt: moment().add(time, "m").toDate() // Date item is added
+            });
+            db.close();
+            message.channel.send(`Item **${name}** has been added!`).catch(err => console.log(err));
           });
-          db.close();
-          message.channel.send(`Item **${name}** has been added!`).catch(err => console.log(err));
-        });
+        }
       }
     }
     else if (args[0] === "view") { // If user calls view command
