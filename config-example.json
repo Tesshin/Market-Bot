@@ -1,6 +1,9 @@
 {
   "token":"",
-  "prefix":"",
-  "ownerID": "",
-  "mongodb_key": ""
+  "mongodb_uri": "",
+  "prefix":"!",
+  "database_name": "market-bot",
+  "collection_name": "items",
+  "embed_colour": "3498db",
+  "default_listing_time": 5
 }
