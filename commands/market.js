@@ -20,7 +20,7 @@ exports.run = (client, message, args) => {
           message.channel.send("That item name is too long!").catch(err => console.log(err));
         } else {
           message.channel.send(`Adding item **${name}** for ${time} minute(s)...`).catch(err => console.log(err));
-          MongoClient.connect(config.mongodb_uri, {useNewUrlParser: true}, function (err, db) { // Connect to MongoDB
+          MongoClient.connect(config.mongodb_uri, {useNewUrlParser: true}, function(err, db) { // Connect to MongoDB
             const dbo = db.db(config.database_name); // Select database
             dbo.collection(config.collection_name).insertOne({ // Insert a document
               itemName: name, // Name of item
@@ -38,9 +38,9 @@ exports.run = (client, message, args) => {
       const market = new AsciiTable(); // Create ASCII table
       market.setBorder("║", "═", "╬", "╬");
       market.setHeading("Item Name", "Submitted By", "Time Remaining");
-      MongoClient.connect(config.mongodb_uri, {useNewUrlParser: true}, function (err, db) { // Connect to MongoDB
+      MongoClient.connect(config.mongodb_uri, {useNewUrlParser: true}, function(err, db) { // Connect to MongoDB
         const dbo = db.db(config.database_name); // Select databse
-        dbo.collection(config.collection_name).find({}).toArray(function (err, result) { // Get all documents in collection into array
+        dbo.collection(config.collection_name).find({}).toArray(function(err, result) { // Get all documents in collection into array
           if (err) throw err;
           if (result.length === 0) { // If no documents in array
             message.channel.send("```No items are currently listed.```");
