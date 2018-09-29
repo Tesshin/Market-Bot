@@ -5,9 +5,6 @@ module.exports = (client, message) => {
   const command = args.shift().toLowerCase();
   const cmd = client.commands.get(command);
 
-  console.log(command);
-  console.log(cmd);
-
   if (!cmd) return;
   cmd.run(client, message, args);
 };
