@@ -1,8 +1,9 @@
 # Market-JS Discord Bot
 
-<a href="https://discord.js.org/" alt="discord.js 11.4.2"><img src="https://img.shields.io/badge/discord.js-11.4.2-blue.svg" /></a>
-<a href="https://nodejs.org/en/" alt="Node.js 10.11.0"><img src="https://img.shields.io/badge/Node.js-10.11.0-green.svg" /></a>
-<a href="https://gitlab.com/Rowlie/cs-pound/blob/master/LICENSE" alt="MIT License"><img src="https://img.shields.io/badge/License-MIT-blue.svg" /></a>
+[![Build Status](https://travis-ci.com/Tesshin/Market-JS.svg?token=sz9EfaY65y1dePiQtxzm&branch=master)](https://travis-ci.com/Tesshin/Market-JS)
+[![discord.js 11.4.2](https://img.shields.io/badge/discord.js-11.4.2-blue.svg)](https://discord.js.org/)
+[![Node.js 10.11.0](https://img.shields.io/badge/Node.js-10.11.0-green.svg)](https://nodejs.org/en/)
+[![MIT License](https://img.shields.io/badge/License-MIT-blue.svg)](https://github.com/Tesshin/Market-JS/blob/master/README.md)
 
 A Discord bot for the online virtual pet adopting website. With the bot you can view pet information and pound opening times straight in Discord without needing to access the website.
 
