@@ -1,4 +1,4 @@
-# Market-JS Discord Bot
+# Market-Bot Discord Bot
 
 [![Build Status](https://travis-ci.com/Tesshin/Market-JS.svg?token=sz9EfaY65y1dePiQtxzm&branch=master)](https://travis-ci.com/Tesshin/Market-JS)
 [![discord.js 11.4.2](https://img.shields.io/badge/discord.js-11.4.2-blue.svg)](https://discord.js.org/)
