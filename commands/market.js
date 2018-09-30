@@ -1,10 +1,10 @@
 exports.run = (client, message, args) => {
+  const Discord = require("discord.js");
   const config = require("../config.json");
   let invalidCommand = false;
   if (args.length > 0) {
     const MongoClient = require("mongodb").MongoClient; // MongoDB Client
     const moment = require("moment"); // Handling adding time
-    const AsciiTable = require("ascii-table"); // Create `!market view` table
 
     if (args[0] === "add") { // If user calls add command
       if (args[1] === undefined) { // If user doesn't provide an item
@@ -19,7 +19,6 @@ exports.run = (client, message, args) => {
         if (name.length > 40) {
           message.channel.send("That item name is too long!").catch(err => console.log(err));
         } else {
-          message.channel.send(`Adding item **${name}** for ${time} minute(s)...`).catch(err => console.log(err));
           MongoClient.connect(config.mongodb_uri, {useNewUrlParser: true}, function(err, db) { // Connect to MongoDB
             const dbo = db.db(config.database_name); // Select database
             dbo.collection(config.collection_name).insertOne({ // Insert a document
@@ -28,30 +27,51 @@ exports.run = (client, message, args) => {
               createdAt: moment().add(time, "m").toDate() // Date item is added
             });
             db.close();
-            message.channel.send(`Item **${name}** has been added!`).catch(err => console.log(err));
+            message.channel.send(`Item **${name}** has been added for ${time} minute(s)!`).catch(err => console.log(err));
           });
         }
       }
     }
     else if (args[0] === "view") { // If user calls view command
-      message.channel.send("Loading market...").catch(err => console.log(err));
-      const market = new AsciiTable(); // Create ASCII table
-      market.setBorder("║", "═", "╬", "╬");
-      market.setHeading("Item Name", "Submitted By", "Time Remaining");
+      let pageNumber = 0;
       MongoClient.connect(config.mongodb_uri, {useNewUrlParser: true}, function(err, db) { // Connect to MongoDB
-        const dbo = db.db(config.database_name); // Select databse
+        const dbo = db.db(config.database_name); // Select database
         dbo.collection(config.collection_name).find({}).toArray(function(err, result) { // Get all documents in collection into array
           if (err) throw err;
-          if (result.length === 0) { // If no documents in array
-            message.channel.send("```No items are currently listed.```");
+          if (!result.length) { // If no documents in array
+            message.channel.send("No items are currently listed.").catch(err => console.log(err));
           } else {
-            result.forEach(item => { // For each document
-              const remaining = moment(item["createdAt"]).diff(moment(), "m") + " minute(s)"; // Get how long until document expires
-              market.addRow(item["itemName"], item["submittedBy"], remaining); // Add item to table
-            });
-            message.channel.send(`\`\`\`${market.toString()}\`\`\``).catch(err => console.log(err));
-            db.close();
+            if (isNaN(args[1]) || args[1] < 1 || args[1] === undefined) { // If user provided an invalid number
+              pageNumber = 0;
+            } else {
+              pageNumber = parseInt(args[1]) - 1; // Set page number to selected number
+            }
+
+            if (!result.slice(pageNumber * config.page_limit, (pageNumber * config.page_limit) + config.page_limit).length) {
+              message.channel.send("There are no items on this page.").catch(err => console.log(err));
+            } else {
+              const items = result.slice(pageNumber * config.page_limit, (pageNumber * config.page_limit) + config.page_limit);
+              const listings = [];
+              items.forEach(item => {
+                const listing = `**${item["itemName"]}** | ${item["submittedBy"]} | ${moment(item["createdAt"]).diff(moment(), "m")} minute(s)`; // Item Name | User#1234 | X minute(s)
+                listings.push(listing);
+              });
+              const description = listings.join("\n");
+              let pastLimit;
+              if (pageNumber * config.page_limit + config.page_limit > result.length) {
+                pastLimit = result.length
+              } else {
+                pastLimit = pageNumber * config.page_limit + config.page_limit
+              }
+              const embed = new Discord.RichEmbed()
+                .setTitle("Currently Listed Items:")
+                .setColor(config.embed_colour)
+                .setDescription(description)
+                .setFooter(`Showing ${pageNumber * config.page_limit + 1}-${pastLimit} of ${result.length} listed items.`);
+              message.channel.send({embed}).catch(err => console.log(err));
+            }
           }
+          db.close();
         });
       });
     } else {
