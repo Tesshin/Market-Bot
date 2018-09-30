@@ -26,14 +26,14 @@ exports.run = (client, message, args) => {
               submittedBy: message.author.tag, // Discord tag of user
               createdAt: moment().add(time, "m").toDate() // Date item is added
             });
-            db.close();
+            db.close(); // Close connection
             message.channel.send(`Item **${name}** has been added for ${time} minute(s)!`).catch(err => console.log(err));
           });
         }
       }
     }
     else if (args[0] === "view") { // If user calls view command
-      let pageNumber = 0;
+      let pageNumber;
       MongoClient.connect(config.mongodb_uri, {useNewUrlParser: true}, function(err, db) { // Connect to MongoDB
         const dbo = db.db(config.database_name); // Select database
         dbo.collection(config.collection_name).find({}).toArray(function(err, result) { // Get all documents in collection into array
@@ -47,31 +47,31 @@ exports.run = (client, message, args) => {
               pageNumber = parseInt(args[1]) - 1; // Set page number to selected number
             }
 
-            if (!result.slice(pageNumber * config.page_limit, (pageNumber * config.page_limit) + config.page_limit).length) {
+            if (!result.slice(pageNumber * config.page_limit, (pageNumber * config.page_limit) + config.page_limit).length) { // If no items on page
               message.channel.send("There are no items on this page.").catch(err => console.log(err));
             } else {
-              const items = result.slice(pageNumber * config.page_limit, (pageNumber * config.page_limit) + config.page_limit);
+              const items = result.slice(pageNumber * config.page_limit, (pageNumber * config.page_limit) + config.page_limit); // Get items on requested page
               const listings = [];
               items.forEach(item => {
                 const listing = `**${item["itemName"]}** | ${item["submittedBy"]} | ${moment(item["createdAt"]).diff(moment(), "m")} minute(s)`; // Item Name | User#1234 | X minute(s)
-                listings.push(listing);
+                listings.push(listing); // Add item to array
               });
-              const description = listings.join("\n");
+              const description = listings.join("\n"); // Combine array to a single string
               let pastLimit;
-              if (pageNumber * config.page_limit + config.page_limit > result.length) {
+              if (pageNumber * config.page_limit + config.page_limit > result.length) { // If the current item index is higher than the total amount of items
                 pastLimit = result.length
               } else {
                 pastLimit = pageNumber * config.page_limit + config.page_limit
               }
-              const embed = new Discord.RichEmbed()
+              const embed = new Discord.RichEmbed() // Create embed
                 .setTitle("Currently Listed Items:")
                 .setColor(config.embed_colour)
                 .setDescription(description)
-                .setFooter(`Showing ${pageNumber * config.page_limit + 1}-${pastLimit} of ${result.length} listed items.`);
+                .setFooter(`Showing ${pageNumber * config.page_limit + 1}-${pastLimit} of ${result.length} listed items.`); // Showing 1-10 of 20 listed items.
               message.channel.send({embed}).catch(err => console.log(err));
             }
           }
-          db.close();
+          db.close(); // Close connection
         });
       });
     } else {
@@ -80,8 +80,8 @@ exports.run = (client, message, args) => {
   } else {
     invalidCommand = true;
   }
-  if (invalidCommand) {
-    const embed = new Discord.RichEmbed()
+  if (invalidCommand) { // If user provided invalid command or provided no arguments
+    const embed = new Discord.RichEmbed() // Create embed
       .setTitle("Market Commands:")
       .setColor(config.embed_colour)
       .addField(`${config.prefix}market add <time>`, "Add an item to the market.")
