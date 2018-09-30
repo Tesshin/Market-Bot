@@ -59,9 +59,9 @@ exports.run = (client, message, args) => {
               const description = listings.join("\n"); // Combine array to a single string
               let pastLimit;
               if (pageNumber * config.page_limit + config.page_limit > result.length) { // If the current item index is higher than the total amount of items
-                pastLimit = result.length
+                pastLimit = result.length;
               } else {
-                pastLimit = pageNumber * config.page_limit + config.page_limit
+                pastLimit = pageNumber * config.page_limit + config.page_limit;
               }
               const embed = new Discord.RichEmbed() // Create embed
                 .setTitle("Currently Listed Items:")
