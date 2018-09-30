@@ -14,7 +14,8 @@ A Discord bot for the online virtual pet adopting website. With the bot you can 
 
 ### Installation
 * Install all requirements using : `npm install`.
-* Rename `config-example.json` to `config.json` and fill in the properties.
+* Rename `settings-example.json` to `settings.json` and fill in the properties.
+* [Refer to this for remaining steps](https://github.com/Tesshin/Market-Bot/wiki/Installation)
 
 ### Running
 
