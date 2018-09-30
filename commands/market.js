@@ -16,7 +16,7 @@ exports.run = (client, message, args) => {
           time = parseInt(args.slice(-1)[0].match(/^(\d{1,2})m?/)[0]); // Get listing time
           name = args.slice(1, -1).join(" "); // Get name of item
         }
-        if (name.length > 40) {
+        if (name.length > 30) {
           message.channel.send("That item name is too long!").catch(err => console.log(err));
         } else {
           MongoClient.connect(config.mongodb_uri, {useNewUrlParser: true}, function(err, db) { // Connect to MongoDB
