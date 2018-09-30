@@ -81,17 +81,11 @@ exports.run = (client, message, args) => {
     invalidCommand = true;
   }
   if (invalidCommand) {
-    message.channel.send({embed: {
-      color: parseInt(config.embed_colour, 16), // Convert hex into decimal
-      title: "Market Commands:",
-      fields: [{
-        name: `${config.prefix}market add <time>`,
-        value: "Add an item to the market."
-      },
-      {
-        name: `${config.prefix}market view`,
-        value: "View all items currently in the market."
-      }]
-    }}).catch(err => console.log(err));
+    const embed = new Discord.RichEmbed()
+      .setTitle("Market Commands:")
+      .setColor(config.embed_colour)
+      .addField(`${config.prefix}market add <time>`, "Add an item to the market.")
+      .addField(`${config.prefix}market view`, "View all items currently in the market.");
+    message.channel.send({embed}).catch(err => console.log(err));
   }
 };
