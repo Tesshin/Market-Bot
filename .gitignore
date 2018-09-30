@@ -34,7 +34,7 @@ build/Release
 
 # Market-JS Things
 .idea
-config.json
+settings.json
 
 # Dependency directories
 node_modules/

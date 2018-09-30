@@ -1,6 +1,6 @@
 exports.run = (client, message, args) => {
   const Discord = require("discord.js");
-  const config = require("../config.json");
+  const config = require("../settings.json");
   let invalidCommand = false;
   if (args.length > 0) {
     const MongoClient = require("mongodb").MongoClient; // MongoDB Client
