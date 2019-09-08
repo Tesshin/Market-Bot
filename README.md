@@ -5,7 +5,7 @@
 [![Node.js 10.11.0](https://img.shields.io/badge/Node.js-10.11.0-green.svg)](https://nodejs.org/en/)
 [![MIT License](https://img.shields.io/badge/License-MIT-blue.svg)](https://github.com/haruyuki/Market-Bot/blob/master/README.md)
 
-A Discord bot for the online virtual pet adopting website. With the bot you can view pet information and pound opening times straight in Discord without needing to access the website.
+A Discord bot that creates a timed market with MongoDB.
 
 ### Prerequisites
 
