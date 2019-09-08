@@ -1,9 +1,9 @@
 # Market-Bot Discord Bot
 
-[![Build Status](https://travis-ci.com/Tesshin/Market-JS.svg?token=sz9EfaY65y1dePiQtxzm&branch=master)](https://travis-ci.com/Tesshin/Market-JS)
+[![Build Status](https://travis-ci.com/haruyuki/Market-Bot.svg?token=sz9EfaY65y1dePiQtxzm&branch=master)](https://travis-ci.com/haruyuki/Market-Bot)
 [![discord.js 11.4.2](https://img.shields.io/badge/discord.js-11.4.2-blue.svg)](https://discord.js.org/)
 [![Node.js 10.11.0](https://img.shields.io/badge/Node.js-10.11.0-green.svg)](https://nodejs.org/en/)
-[![MIT License](https://img.shields.io/badge/License-MIT-blue.svg)](https://github.com/Tesshin/Market-JS/blob/master/README.md)
+[![MIT License](https://img.shields.io/badge/License-MIT-blue.svg)](https://github.com/haruyuki/Market-Bot/blob/master/README.md)
 
 A Discord bot for the online virtual pet adopting website. With the bot you can view pet information and pound opening times straight in Discord without needing to access the website.
 
@@ -15,7 +15,7 @@ A Discord bot for the online virtual pet adopting website. With the bot you can 
 ### Installation
 * Install all requirements using : `npm install`.
 * Rename `settings-example.json` to `settings.json` and fill in the properties.
-* [Refer to this for remaining steps](https://github.com/Tesshin/Market-Bot/wiki/Installation)
+* [Refer to this for remaining steps](https://github.com/haruyuki/Market-Bot/wiki/Installation)
 
 ### Running
 
